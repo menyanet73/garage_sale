@@ -1,0 +1,123 @@
+:root {
+    --clr-primary: #6aeeb5;
+    --clr-primary-hover: #29e6a7;
+    --clr-gray100: #f0f7f8;
+    --clr-gray200: #cfd8dc;
+    /* border radius */
+    --radius: 0.8rem;
+}
+
+body {
+    font-family: Montserrat, sans-serif;
+    background: var(--clr-gray100);
+}
+
+main {
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.nav-list {
+    background: white;
+    box-shadow: 0px 0px 10px var(--clr-gray200);
+    margin: 0;
+    padding: 1rem 0;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav-item {
+    list-style: none;
+    margin: 0rem 1rem;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: black;
+    transition: all 200ms ease-in;
+}
+
+.nav-item a:hover {
+    color: var(--clr-primary-hover);
+}
+
+.nav-item:first-child {
+    margin-right: auto;
+    margin-left: 2rem;
+    font-weight: 600;
+}
+
+.btn-primary {
+    font-family: Montserrat, sans-serif;
+    font-size: 1rem;
+    background: var(--clr-primary);
+    border: none;
+    outline: none;
+    border-radius: var(--radius);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 200ms ease-in;
+}
+
+.btn-primary:hover {
+    background: var(--clr-primary-hover)
+}
+
+.board {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardbox {
+    padding: 2.5rem 0rem;
+}
+
+.card {
+    background: white;
+    display: grid;
+    grid-template-columns: 300px;
+    grid-template-rows: 210px 210px 80px;
+    grid-template-areas: 'image' 'text' 'detail';
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+    text-align: center;
+    border-radius: var(--radius);
+    margin: 15px;
+    transition: 0.5s;
+}
+
+.card-image {
+    grid-area: image;
+}
+
+.card .text .titlebox {
+    grid-area: text;
+    margin: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    background-color: #abfed6;
+    border-radius: var(--radius);
+}
+
+.card .price {
+    font-weight: 300;
+    vertical-align: center;
+}
+
+.card-detail {
+    grid-area: detail;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+.card .border {
+    border-left: 2px solid #9cdabc;
+}

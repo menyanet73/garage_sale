@@ -1,0 +1,7 @@
+Created temporary directory: /tmp/pip-ephem-wheel-cache-xn_pnusl
+asgiref==3.4.1
+backports.zoneinfo==0.2.1
+Django==4.0
+Pillow==8.4.0
+sorl-thumbnail==12.7.0
+sqlparse==0.4.2

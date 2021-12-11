@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="board">
+    {% for item in page_obj %}
+      {% include 'saleboard/includes/item_list.html' %}
+    {% endfor %}
+  </div>
+{% endblock content %}
