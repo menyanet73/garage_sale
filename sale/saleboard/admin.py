@@ -1,15 +1,17 @@
 from django.contrib import admin
 
-from .models import Item, UserProfile, Photos
-
+from .models import Category, Item, UserProfile
+from gallery.models import Photo, Gallery
 
 class ItemAdmin(admin.ModelAdmin):
     list_display = (
         'author',
+        'category',
         'title',
         'description',
         'price',
-        'created'
+        'created',
+
     )
     search_fields = ('title', 'description',)
     list_filter = ('created',)
@@ -18,4 +20,6 @@ class ItemAdmin(admin.ModelAdmin):
 
 admin.site.register(Item, ItemAdmin)
 admin.site.register(UserProfile)
-admin.site.register(Photos)
+admin.site.register(Photo)
+admin.site.register(Category)
+admin.site.register(Gallery)

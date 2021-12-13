@@ -2,7 +2,9 @@
     --clr-primary: #6aeeb5;
     --clr-primary-hover: #29e6a7;
     --clr-gray100: #f0f7f8;
+    --clr-gray100: #262b2c;
     --clr-gray200: #cfd8dc;
+    --clr-gray200: #808e92;
     /* border radius */
     --radius: 0.8rem;
 }
@@ -20,6 +22,7 @@ main {
 
 .nav-list {
     background: white;
+    background: rgb(31, 31, 31);
     box-shadow: 0px 0px 10px var(--clr-gray200);
     margin: 0;
     padding: 1rem 0;
@@ -36,7 +39,7 @@ main {
 
 .nav-item a {
     text-decoration: none;
-    color: black;
+    color: white;
     transition: all 200ms ease-in;
 }
 
@@ -78,7 +81,7 @@ main {
 }
 
 .card {
-    background: white;
+    background: rgb(27, 27, 27);
     display: grid;
     grid-template-columns: 300px;
     grid-template-rows: 210px 210px 80px;
@@ -88,6 +91,7 @@ main {
     border-radius: var(--radius);
     margin: 15px;
     transition: 0.5s;
+    color: white;
 }
 
 .card-image {
@@ -102,11 +106,18 @@ main {
     grid-template-rows: 1fr;
     background-color: #abfed6;
     border-radius: var(--radius);
+    color: black;
+    align-items: center;
+}
+
+.titlebox .title {
+    align-items: center;
 }
 
 .card .price {
     font-weight: 300;
-    vertical-align: center;
+    align-items: center;
+    margin: 20px;
 }
 
 .card-detail {

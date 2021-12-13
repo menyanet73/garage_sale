@@ -1,12 +1,14 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 User = get_user_model()
 
 
 class UserProfile(models.Model):
+    """Отклонения от встроенной модели пользователя"""
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -26,7 +28,26 @@ class UserProfile(models.Model):
         return self.user.username
 
 
+class Category(MPTTModel):
+    """Категория"""
+    name = models.CharField(max_length=50, unique=True)
+    parent = TreeForeignKey(
+        'self',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='children',
+    )
+
+    def __str__(self):
+        return self.name
+
+    class MPTTMeta:
+        order_inserion_by = ['name']
+
+
 class Item(models.Model):
+    """Объявление"""
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -51,6 +72,18 @@ class Item(models.Model):
     created = models.DateTimeField(
         auto_now_add=True,
     )
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='items',
+    )
+    gallery = models.ForeignKey(
+        'gallery.Gallery',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
+    slug = models.SlugField("url", max_length=50)
 
     class Meta:
         ordering = ['-created']
@@ -59,20 +92,3 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title[:20]
-
-
-class Photos(models.Model):
-    item = models.ForeignKey(
-        Item,
-        on_delete=models.CASCADE,
-        related_name='photos'
-    )
-    image = models.ImageField(
-        'Фото товара',
-        upload_to='sale/',
-        blank=True
-    )
-
-    class Meta:
-        verbose_name = 'фото'
-        verbose_name_plural = verbose_name

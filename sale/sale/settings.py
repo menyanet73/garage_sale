@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'saleboard.apps.SaleboardConfig',
+    'gallery.apps.GalleryConfig',
     'users.apps.UsersConfig',
     'sorl.thumbnail',
     'phonenumber_field',
