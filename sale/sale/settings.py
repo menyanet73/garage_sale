@@ -34,8 +34,10 @@ INSTALLED_APPS = [
     'saleboard.apps.SaleboardConfig',
     'gallery.apps.GalleryConfig',
     'users.apps.UsersConfig',
+    'core.apps.CoreConfig',
     'sorl.thumbnail',
     'phonenumber_field',
+    'debug_toolbar',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -53,6 +55,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
 ]
 
 ROOT_URLCONF = 'sale.urls'

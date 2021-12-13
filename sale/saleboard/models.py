@@ -82,6 +82,7 @@ class Item(models.Model):
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
+        related_name='items',
     )
     slug = models.SlugField("url", max_length=50)
 

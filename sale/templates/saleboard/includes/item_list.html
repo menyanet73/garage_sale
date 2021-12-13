@@ -3,9 +3,9 @@
   <div class="cardbox">
     <div class="card">
       <div class="image">
-        {% for photo in item.gallery.photos.image.all %}
+        {% for photo in item.gallery.photos.all %}
           {% if item.gallery.photos %}
-            <img src="{{ photo.image.url }}">
+            <img src="{{ photo.image.url }}" class="card-image" alt="photo">
           {% endif %}
         {% endfor %}
       </div>
@@ -15,7 +15,7 @@
             <h3>{{ item.title }}</h3>
           </div>
           <div class="price border">
-            {{ item.price }}
+            {{ item.price }} ₽
           </div>
         </div>
         <div class="description">
