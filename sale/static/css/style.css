@@ -4,6 +4,7 @@ body {
 }
 
 main {
+    display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -90,6 +91,14 @@ main {
     background: rgb(83, 83, 83);
 }
 
+.gray {
+    background: rgb(44, 44, 44);
+}
+
+.gray:hover {
+    background: rgb(83, 83, 83);
+}
+
 
 /* Карточки для главной */
 
@@ -114,7 +123,7 @@ main {
     text-align: center;
     border-radius: var(--radius);
     margin: 15px;
-    transition: 0.5s;
+    transition: 0.1s;
     color: white;
 }
 
@@ -156,8 +165,9 @@ main {
 }
 
 .card:hover {
-    transform: scale(1.1);
+    transform: scale(1.0);
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
+    content: attr(data-title);
 }
 
 .card .border {
@@ -183,8 +193,6 @@ main {
     padding-bottom: 2rem;
     margin: 3%;
 }
-
-.board {}
 
 .cardform .form {
     grid-area: form;
@@ -225,6 +233,10 @@ main {
     margin: 5px;
 }
 
+textarea {
+    height: 260px;
+}
+
 
 /* Сообщения об ошибках */
 
@@ -234,4 +246,66 @@ main {
 
 .alert {
     color: rgb(172, 0, 0);
+}
+
+
+/* Детали о товаре */
+
+.detailboard {
+    display: grid;
+    background: rgb(31, 31, 31);
+    width: 80%;
+    box-shadow: 0.1rem 0.1rem 1rem var(--clr-gray200);
+    margin: 2rem;
+    border-radius: var(--radius);
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.photogallery img {
+    border-radius: 15px 15px 0 0;
+    height: 100%;
+    width: 100%;
+}
+
+.detailboard .title {
+    font-size: 2rem;
+}
+
+
+/* CSS Фигуры */
+
+
+/* CSS Карта добавления товара */
+
+.circle {
+    display: flex;
+    width: 50%;
+    height: 70%;
+    background: rgb(173, 173, 173);
+    border-radius: 50%;
+    margin: 50% 25% 50% 25%;
+}
+
+.plus-content {
+    margin: 18% 43%;
+}
+
+.plus {
+    background: rgb(47, 47, 47);
+    height: 100px;
+    width: 1.3rem;
+    position: relative;
+    left: 0;
+}
+
+.plus:after {
+    content: '';
+    height: 1.3rem;
+    width: 100px;
+    background: rgb(47, 47, 47);
+    position: absolute;
+    left: -2.5rem;
+    top: 2.5rem;
 }

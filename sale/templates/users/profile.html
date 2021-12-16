@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load user_filters %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="board">
+  <div class="cardbox">
+    <div class="card">
+      <ul>
+        <li>
+          Имя пользователя: {{ profile.user.username }}
+        </li>
+        <li>
+          Имя: {{ profile.get_full_name }}
+        </li>
+        <li>
+          Электронная почта: {{ profile.email }}
+        </li>
+        <li>
+          Телефон: {{ profile.phone }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+    {% for item in page_obj %}
+      {% include 'saleboard/includes/item_list.html' %}
+    {% endfor %}
+</div>
+{% endblock content %}

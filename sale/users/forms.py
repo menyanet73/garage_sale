@@ -1,5 +1,7 @@
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from saleboard.models import User
+from .models import UserProfile
 
 
 class CreationForm(UserCreationForm):
@@ -7,5 +9,16 @@ class CreationForm(UserCreationForm):
         model = User
         fields = (
             'username',
+        )
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = (
+            'first_name',
+            'last_name',
+            'phone',
             'email',
+            'avatar',
         )

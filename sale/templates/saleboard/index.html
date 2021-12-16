@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
+{% load user_filters %}
 {% block content %}
-  <div class="board">
+{% if user.is_authenticated %}
+<div class="board">
+  <div class="cardbox">
+    <div class="card">
+      <a href="{% url 'saleboard:item_create' %}">
+        <div class="circle">
+          <div class="plus-content">
+            <div class="plus"></div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  {% endif %}
     {% for item in page_obj %}
       {% include 'saleboard/includes/item_list.html' %}
     {% endfor %}
-  </div>
+</div>
 {% endblock content %}

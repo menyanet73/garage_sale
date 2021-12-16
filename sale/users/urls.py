@@ -10,10 +10,11 @@ app_name = 'users'
 urlpatterns = [
     path(
         'logout/',
-        LogoutView.as_view(template_name='users/logged_out.html'),
+        LogoutView.as_view(template_name='users/logout.html'),
         name='logout'
     ),
     path('signup/', views.SignUp.as_view(), name='signup'),
+    path('profile_update/', views.profile_update, name='profile_update'),
     path(
         'login/',
         LoginView.as_view(template_name='users/login.html'),
@@ -36,4 +37,5 @@ urlpatterns = [
         ),
         name='password_change_done'
     ),
+    path('profile/<slug:username>/', views.profile, name='profile'),
 ]

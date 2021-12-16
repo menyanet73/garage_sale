@@ -10,12 +10,25 @@
         </li>
         <li class="nav-item">
           <a href="#">Категории</a></li>
+        {% if not user.is_authenticated %}
         <li class="nav-item">
-          <a href="{% url 'users:signup' %}">Регистрация</a>
+          <a href="{% url "users:signup" %}">Регистрация</a>
         </li>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{% url "users:profile" user.username %}">
+            Профиль
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'users:logout' %}"><button class="btn-primary gray">Выйти</button></a>
+        </li>
+        {% else %}
         <li class="nav-item">
           <a href="{% url 'users:login' %}"><button class="btn-primary">Войти</button></a>
         </li>
+        {% endif %}
       </ul>
     </div>
     

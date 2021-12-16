@@ -1,31 +1,8 @@
-from django.contrib.auth import get_user_model
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
+
 from mptt.models import MPTTModel, TreeForeignKey
-
-
-User = get_user_model()
-
-
-class UserProfile(models.Model):
-    """Отклонения от встроенной модели пользователя"""
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='phone',
-    )
-    phone = PhoneNumberField(
-        null=False,
-        blank=False,
-        unique=True,
-    )
-
-    class Meta:
-        verbose_name = 'Данные профиля'
-        verbose_name_plural = verbose_name
-
-    def __str__(self) -> str:
-        return self.user.username
+from core.utils.transileration import transliteration_rus_eng
+from users.models import User
 
 
 class Category(MPTTModel):
@@ -44,6 +21,10 @@ class Category(MPTTModel):
 
     class MPTTMeta:
         order_inserion_by = ['name']
+    
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
 
 class Item(models.Model):
@@ -77,14 +58,7 @@ class Item(models.Model):
         on_delete=models.CASCADE,
         related_name='items',
     )
-    gallery = models.ForeignKey(
-        'gallery.Gallery',
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='items',
-    )
-    slug = models.SlugField("url", max_length=50)
+    slug = models.SlugField("url", max_length=50, unique=True)
 
     class Meta:
         ordering = ['-created']
@@ -93,3 +67,7 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title[:20]
+
+    def save(self, *args, **kwargs):
+        self.slug = transliteration_rus_eng(self.title) + "_" + str(self.id)
+        super().save(*args, **kwargs)
