@@ -60,14 +60,39 @@ class Item(models.Model):
     )
     slug = models.SlugField("url", max_length=50, unique=True)
 
-    class Meta:
-        ordering = ['-created']
-        verbose_name = 'Объявление'
-        verbose_name_plural = 'Объявления'
+
+    def get_image_filename(instance, filename):
+        title = instance.item.title
+        slug = transliteration_rus_eng(title)
+        return "post_images/%s-%s" % (slug, filename)
 
     def __str__(self):
         return self.title[:20]
 
     def save(self, *args, **kwargs):
-        self.slug = transliteration_rus_eng(self.title) + "_" + str(self.id)
+        self.slug = transliteration_rus_eng(self.title) + "_" + str(self.pk)
         super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name = 'Объявление'
+        verbose_name_plural = 'Объявления'
+
+class Images(models.Model):
+    item = models.ForeignKey(
+        Item,
+        default=None,
+        on_delete=models.CASCADE,
+        related_name='images',
+    )
+    images = models.ImageField(
+        upload_to='gallery/%d-%s/',
+        verbose_name='Изображение',
+    )
+
+    def __str__(self) -> str:
+        return self.item.title
+
+    class Meta:
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения'

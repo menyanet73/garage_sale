@@ -1,9 +1,20 @@
 from django import forms
 
-from .models import Item
+from .models import Item, Images
 
 
 class ItemForm(forms.ModelForm):
+    images = forms.ImageField(
+        label=u'Фотографии',
+        widget=forms.FileInput(attrs={'multiple': 'multiple'}),
+        required=False,
+    )
     class Meta:
         model = Item
-        fields = ('title', 'description', 'price', 'category',)
+        fields = ('title', 'description', 'price', 'category', )
+
+class ImagesForm(forms.ModelForm):
+
+    class Meta:
+        model = Images
+        fields = ('images', )
