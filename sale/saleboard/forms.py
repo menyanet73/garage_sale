@@ -5,7 +5,7 @@ from .models import Item, Images
 
 class ItemForm(forms.ModelForm):
     images = forms.ImageField(
-        label=u'Фотографии',
+        label=u'Добавить фото',
         widget=forms.FileInput(attrs={'multiple': 'multiple'}),
         required=False,
     )

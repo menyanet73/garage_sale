@@ -3,8 +3,8 @@
   <div class="cardbox">
     <div class="card">
       <div class="image">
-        {% for photo in item.images.all %}
-          {% if item.gallery.photos %}
+        {% for photo in first_image_list %}
+          {% if photo.item == item %}
             <img src="{{ photo.images.url }}" class="card-image" alt="photo">
           {% endif %}
         {% endfor %}

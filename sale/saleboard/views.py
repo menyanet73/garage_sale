@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
 from django.core.paginator import Paginator
+from django.db.models.query import QuerySet
 from django.forms.models import modelformset_factory
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -14,13 +15,13 @@ from .forms import ItemForm, ImagesForm
 def index(request):
     post_list = (
         Item.objects
-        .select_related('gallery', 'category')
-        .prefetch_related('gallery__photos')
-        # .values(
-        #     'title', 'description', 'price',
-        #     'gallery__photos', 'category__name'
-        # )
+        .select_related('category')
     )
+    first_image_list = []
+    #Снова костыль
+    for item in post_list:
+        first_image_list.append(Images.objects.filter(item=item).first)
+    print(first_image_list)
     paginator = Paginator(post_list, settings.PAGE_COUNT)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -28,6 +29,7 @@ def index(request):
     context = {
         'title': 'Главная страница',
         'page_obj': page_obj,
+        'first_image_list': first_image_list,
     }
     return render(request, template, context)
 
@@ -56,22 +58,6 @@ def item_create(request):
 
 
     if form.is_valid():
-        
-        # if form.cleaned_data['images']:
-            # for imgobj in form.images:
-            #     image = Images(item=item)
-            #     images_form = ImagesForm(
-            #         request.POST,
-            #         files=imgobj,
-            #         instance=image
-            #     )
-            #     if images_form.is_valid():
-            #         form.save()
-            #         images_form.save()
-            #         return redirect('saleboard:index')
-
-            #     else:
-            #         print(images_form.errors)
         itemobj = Item.objects.create(
             author=request.user,
             title=form.cleaned_data['title'],
@@ -93,20 +79,9 @@ def item_create(request):
     }
     return render(request, 'saleboard/item_create.html', context)
 
-
-    # item = Item(author=request.user)
-    # form = ItemForm(
-    #     request.POST or None,
-    #     files=request.FILES or None,
-    #     instance=item
-    # )
-    # #gallery_form = 
-    # if form.is_valid():
-    #     form.save()
-    #     #TODO Заменить редирект
-    #     return redirect('saleboard:index')
-    # context = {
-    #     'title': 'Новое объявление',
-    #     'form': form,
-    # }
-    # return render(request, 'saleboard/item_create.html', context)
+@login_required
+def item_delete(request, slug):
+    item = get_object_or_404(Item, slug=slug)
+    if item.author == request.user:
+        item.delete()
+        return redirect('saleboard:index')

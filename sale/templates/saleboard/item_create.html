@@ -34,14 +34,21 @@
               {% endif %}
               >
                 <label for="{{ field.id_for_label }}">
-                  <div class="label-name">{{ field.label }}
+                  <div class="label-name">
+                      {{ field.label }}
                     {% if field.field.required %}
                       <span class="required text-danger">*</span>
                     {% endif %}
                   </div>
                 </label>
                 <div>
-                  {{ field|addclass:'form-control' }}
+                  {% if field.label == 'Фотографии' %}
+                    <div class="input-block">
+                      {{ field|addclass:'form-file' }}
+                    </div>
+                  {% else %}
+                    {{ field|addclass:'form-control' }}
+                  {% endif %}
                   {% if field.help_text %}
                     <small id="{{ field.id_for_label }}-help" class="text-muted">
                       {{ field.help_text|safe }}

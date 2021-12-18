@@ -4,9 +4,7 @@
     <div class="cardbox">
       <div class="photogallery">
         {% for photo in item.images.all %}
-          {% if item.gallery.photos %}
-            <img src="{{ photo.images.url }}" class="card-image" alt="photo">
-          {% endif %}
+          <img src="{{ photo.images.url }}" class="card-image" alt="photo">
         {% endfor %}
       </div>
       <div class="text">
@@ -32,6 +30,11 @@
           {{ author.phone }}
         </div>
       </div>
+      <div class="delete-container">
+        <a href="{% url 'saleboard:item_delete' item.slug %}" role="button">
+          <div class="delete-button">Закрыть объявление</div>
+        </a>
+      </div>
     </div>
   </div>
-{% endblock content %}
+  {% endblock content %}

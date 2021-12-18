@@ -69,9 +69,14 @@ class Item(models.Model):
     def __str__(self):
         return self.title[:20]
 
-    def save(self, *args, **kwargs):
-        self.slug = transliteration_rus_eng(self.title) + "_" + str(self.pk)
+    def mod_save(self, *args, **kwargs):
+        """Метод-костыль, для правильного сохранения slug"""
         super().save(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.slug = transliteration_rus_eng(self.title) + "_" + str(self.pk)
+        self.mod_save()
 
     class Meta:
         ordering = ['-created']

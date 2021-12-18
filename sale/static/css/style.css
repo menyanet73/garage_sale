@@ -276,6 +276,35 @@ div.photogallery img.card-image {
     font-size: 2rem;
 }
 
+a {
+    text-decoration: none;
+}
+
+.delete-button {
+    display: flex;
+    color: white;
+    height: 2rem;
+    width: 10rem;
+    background: rgb(129, 15, 15);
+    border-radius: var(--radius);
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin: 1rem;
+    margin-right: 0;
+}
+
+.delete-container {
+    display: flex;
+    justify-content: right;
+}
+
+
+.delete-button:hover {
+    background: rgb(161, 23, 23);
+}
+
 
 /* CSS Фигуры */
 
@@ -311,4 +340,25 @@ div.photogallery img.card-image {
     position: absolute;
     left: -2.5rem;
     top: 2.5rem;
+}
+
+/* Добавление файлов и фото */
+
+label[for='id_images']{
+    display: flex;
+    background: #06a36f;
+    justify-content: center;
+    padding: 0.5rem;
+    cursor: pointer;
+    width: 80%;
+    border-radius: var(--radius);
+    align-items: center;
+    margin: 2rem 0 0 30px;
+    font-size: 20px;
+}
+
+input[type=file] {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
 }
