@@ -12,10 +12,10 @@ Python 3, Django 4.0
 Стек: Python 3, Django 4.0
 ## How start project:
 
-Clone a repository and go to command line:
+Clone a repository and go to bash:
 
 ```sh
-git clone git@github.com:menyanet73/garage_sale.git
+git clone https://github.com/menyanet73/garage_sale.git
 ```
 
 ```sh
