@@ -51,9 +51,26 @@ Apply migrations:
 ```sh
 python3 manage.py migrate
 ```
+Create superuser:
+```sh
+python3 manage.py createsuperuser
+```
+
 
 Start project:
 
 ```sh
 python3 manage.py runserver
+```
+
+## Быстрый старт:
+
+Создайте категорию в админке:
+```sh
+https://127.0.0.1:8000/admin/
+```
+
+Теперь можно попробовать функционал по основному адресу:
+```sh
+https://127.0.0.1/
 ```
