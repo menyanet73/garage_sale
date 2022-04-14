@@ -49,6 +49,9 @@ pip install -r requirements.txt
 Apply migrations:
 
 ```sh
+cd sale
+```
+```sh
 python3 manage.py migrate
 ```
 Create superuser:
